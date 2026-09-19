@@ -1,0 +1,38 @@
+[
+  {
+    "name": "original",
+    "n_features": 3072,
+    "explained_variance": 1.0,
+    "description": "Standardized flattened RGB pixels."
+  },
+  {
+    "name": "pca_10",
+    "n_features": 307,
+    "explained_variance": 0.9677285552024841,
+    "description": "PCA keeping ~10% of original dimensions (307 comps, 96.77% variance)."
+  },
+  {
+    "name": "pca_30",
+    "n_features": 922,
+    "explained_variance": 0.996067464351654,
+    "description": "PCA keeping ~30% of original dimensions (922 comps, 99.61% variance)."
+  },
+  {
+    "name": "pca_50",
+    "n_features": 1536,
+    "explained_variance": 0.9994456171989441,
+    "description": "PCA keeping ~50% of original dimensions (1536 comps, 99.94% variance)."
+  },
+  {
+    "name": "pca_70",
+    "n_features": 2150,
+    "explained_variance": 0.9999305605888367,
+    "description": "PCA keeping ~70% of original dimensions (2150 comps, 99.99% variance)."
+  },
+  {
+    "name": "pca_100",
+    "n_features": 3072,
+    "explained_variance": 1.0,
+    "description": "Reference copy of the full feature space."
+  }
+]
