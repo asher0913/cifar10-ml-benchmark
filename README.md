@@ -23,7 +23,9 @@ the dataset automatically when it is not present.
 
 A stratified 10,000-image training subset with 5-fold cross-validation, and an independent
 2,000-image test subset. Pixels are scaled to [0, 1], flattened to 3,072 features and
-standardised. PCA is fitted on the training folds only.
+standardised. The scaler and PCA are fitted on the training subset only, so the test subset never
+influences them. The cross-validation folds share that one fit, which leaks slightly into CV but
+not into test.
 
 ![Accuracy against PCA dimensionality, and per-class F1](docs/results.png)
 
