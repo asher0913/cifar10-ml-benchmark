@@ -4,8 +4,8 @@ This module trains a plain multilayer perceptron on PCA-compressed CIFAR-10 feat
 It supports two sweeps:
   * Feature sweep: compare different PCA dimensionalities.
   * Hyper-parameter sweep: compare different learning-rate settings.
-All training uses GPU (CUDA or MPS) and records both cross-validation and
-held-out test metrics.
+Training uses CUDA or Apple MPS when available and falls back to the CPU (slower),
+recording both cross-validation and held-out test metrics.
 """
 
 from __future__ import annotations
@@ -31,8 +31,10 @@ from .utils import ensure_dir, save_json, get_device_context, seed_torch
 
 
 def _require_gpu():
-    """Pick a GPU device (CUDA or MPS) and enable cuDNN autotune when possible."""
-    ctx = get_device_context(require_gpu=True)
+    """Pick CUDA, then MPS, then CPU, and enable cuDNN autotune when possible."""
+    ctx = get_device_context(require_gpu=False)
+    if ctx.backend == "cpu":
+        print("No CUDA or MPS device found: training the MLP on the CPU, which is much slower.")
     if ctx.backend == "cuda":
         # Let cuDNN autotune convolutions/linear kernels for better throughput.
         torch.backends.cudnn.benchmark = True
